@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog – FitBlog Pro | Artigos sobre Suplementos, Treino e Fitness</title>
+  <meta name="description" content="Leia os melhores artigos sobre suplementos, treino, hipertrofia, emagrecimento e equipamentos de academia. Reviews e comparativos honestos." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fitblogpro.com.br/blog/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" role="banner">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../" class="logo" aria-label="FitBlog Pro - Página Inicial">
+          <div class="logo-icon" aria-hidden="true">💪</div>
+          <span class="logo-text">Fit<span>Blog</span> Pro</span>
+        </a>
+
+        <nav class="nav" role="navigation" aria-label="Menu principal">
+          <a href="../">Início</a>
+          <a href="./" class="active">Blog</a>
+          <div class="nav-dropdown">
+            <a href="../categoria/" aria-haspopup="true">Categorias ▾</a>
+            <div class="nav-dropdown-menu" role="menu">
+              <a href="../categoria/suplementos/" role="menuitem">💊 Suplementos</a>
+              <a href="../categoria/treino/" role="menuitem">🏋️ Treino</a>
+              <a href="../categoria/hipertrofia/" role="menuitem">💪 Hipertrofia</a>
+              <a href="../categoria/emagrecimento/" role="menuitem">🔥 Emagrecimento</a>
+              <a href="../categoria/equipamentos/" role="menuitem">🏠 Equipamentos</a>
+              <a href="../categoria/roupas-e-acessorios/" role="menuitem">👕 Roupas e Acessórios</a>
+              <a href="../categoria/alimentacao-fitness/" role="menuitem">🥗 Alimentação Fitness</a>
+              <a href="../categoria/reviews/" role="menuitem">⭐ Reviews</a>
+              <a href="../categoria/comparativos/" role="menuitem">⚖️ Comparativos</a>
+              <a href="../categoria/guias-para-iniciantes/" role="menuitem">📚 Guias para Iniciantes</a>
+            </div>
+          </div>
+          <a href="../categoria/reviews/">Reviews</a>
+          <a href="../categoria/comparativos/">Comparativos</a>
+          <a href="../sobre/">Sobre</a>
+        </nav>
+
+        <div class="header-cta">
+          <a href="./" class="btn btn-primary btn-sm">Ver Artigos</a>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobileMenu" class="mobile-menu">
+    <p class="mobile-menu-category">Menu</p>
+    <a href="../">Início</a>
+    <a href="./">Blog</a>
+    <a href="../categoria/reviews/">Reviews</a>
+    <a href="../categoria/comparativos/">Comparativos</a>
+    <a href="../sobre/">Sobre</a>
+    <a href="../contato/">Contato</a>
+    <p class="mobile-menu-category">Categorias</p>
+    <a href="../categoria/suplementos/">💊 Suplementos</a>
+    <a href="../categoria/treino/">🏋️ Treino</a>
+    <a href="../categoria/hipertrofia/">💪 Hipertrofia</a>
+    <a href="../categoria/emagrecimento/">🔥 Emagrecimento</a>
+    <a href="../categoria/equipamentos/">🏠 Equipamentos</a>
+    <a href="../categoria/roupas-e-acessorios/">👕 Roupas e Acessórios</a>
+    <a href="../categoria/alimentacao-fitness/">🥗 Alimentação Fitness</a>
+    <a href="../categoria/guias-para-iniciantes/">📚 Guias para Iniciantes</a>
+  </div>
+
+  <main id="main-content">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Caminho de navegação">
+          <ol>
+            <li><a href="../">Início</a></li>
+            <li>Blog</li>
+          </ol>
+        </nav>
+        <h1>Blog</h1>
+        <p>Reviews, comparativos e guias sobre suplementos, treino e equipamentos de academia.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <!-- Filter Tags -->
+        <div class="d-flex gap-1 flex-wrap mb-4" role="list" aria-label="Filtrar por categoria">
+          <a href="./" class="tag tag-red" role="listitem">Todos</a>
+          <a href="../categoria/suplementos/" class="tag tag-gray" role="listitem">Suplementos</a>
+          <a href="../categoria/treino/" class="tag tag-gray" role="listitem">Treino</a>
+          <a href="../categoria/hipertrofia/" class="tag tag-gray" role="listitem">Hipertrofia</a>
+          <a href="../categoria/emagrecimento/" class="tag tag-gray" role="listitem">Emagrecimento</a>
+          <a href="../categoria/equipamentos/" class="tag tag-gray" role="listitem">Equipamentos</a>
+          <a href="../categoria/reviews/" class="tag tag-gray" role="listitem">Reviews</a>
+          <a href="../categoria/comparativos/" class="tag tag-gray" role="listitem">Comparativos</a>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 300px;gap:3rem;align-items:start;">
+          <!-- Articles List -->
+          <div>
+            <div class="grid grid-2" style="margin-bottom:2rem;">
+
+              <article class="card">
+                <div class="card-image-placeholder" aria-hidden="true">💊</div>
+                <div class="card-body">
+                  <div class="card-category">Suplementos · Review</div>
+                  <h2 class="card-title" style="font-size:1rem;">
+                    <a href="../artigo/melhor-creatina-custo-beneficio/">Melhor Creatina Custo-Benefício: 7 Opções Testadas em 2026</a>
+                  </h2>
+                  <p class="card-excerpt">Comparamos as principais marcas para você escolher sem gastar à toa. Veja qual oferece mais força e desempenho.</p>
+                  <div class="card-meta">
+                    <span>📅 15 Mai 2026</span>
+                    <div class="card-rating"><span class="stars">★★★★★</span> 4.9</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-image-placeholder" aria-hidden="true">🥛</div>
+                <div class="card-body">
+                  <div class="card-category">Suplementos · Review</div>
+                  <h2 class="card-title" style="font-size:1rem;">
+                    <a href="./">Whey Protein Vale a Pena? Veja Quando Comprar e Qual Escolher</a>
+                  </h2>
+                  <p class="card-excerpt">Whey concentrado, isolado ou hidrolisado? Saiba qual é o ideal para cada objetivo.</p>
+                  <div class="card-meta">
+                    <span>📅 12 Mai 2026</span>
+                    <div class="card-rating"><span class="stars">★★★★★</span> 4.8</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-image-placeholder" aria-hidden="true">⚡</div>
+                <div class="card-body">
+                  <div class="card-category">Suplementos · Guia</div>
+                  <h2 class="card-title" style="font-size:1rem;">
+                    <a href="./">Melhores Pré-Treinos para Energia e Foco: Guia Completo 2026</a>
+                  </h2>
+                  <p class="card-excerpt">Testamos os pré-treinos mais vendidos. Descubra qual oferece mais energia e foco.</p>
+                  <div class="card-meta">
+                    <span>📅 10 Mai 2026</span>
+                    <div class="card-rating"><span class="stars">★★★★☆</span> 4.7</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-image-placeholder" aria-hidden="true">🏋️</div>
+                <div class="card-body">
+                  <div class="card-category">Equipamentos · Guia</div>
+                  <h2 class="card-title" style="font-size:1rem;">
+                    <a href="./">Melhores Equipamentos para Treinar em Casa com Pouco Espaço</a>
+                  </h2>
+                  <p class="card-excerpt">Monte uma academia em casa com as melhores opções compactas e eficientes do mercado.</p>
+                  <div class="card-meta">
+                    <span>📅 08 Mai 2026</span>
+                    <div class="card-rating"><span class="stars">★★★★★</span> 4.9</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-image-placeholder" aria-hidden="true">👕</div>
+                <div class="card-body">
+                  <div class="card-category">Roupas e Acessórios · Lista</div>
+                  <h2 class="card-title" style="font-size:1rem;">
+                    <a href="./">Top 10 Roupas Fitness Femininas para Academia em 2026</a>
+                  </h2>
+                  <p class="card-excerpt">As melhores marcas e modelos de roupas fitness femininas que combinam conforto e estilo.</p>
+                  <div class="card-meta">
+                    <span>📅 05 Mai 2026</span>
+                    <div class="card-rating"><span class="stars">★★★★☆</span> 4.6</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-image-placeholder" aria-hidden="true">👟</div>
+                <div class="card-body">
+                  <div class="card-category">Roupas e Acessórios · Review</div>
+                  <h2 class="card-title" style="font-size:1rem;">
+                    <a href="./">Melhores Tênis para Musculação e Treino na Academia</a>
+                  </h2>
+                  <p class="card-excerpt">Qual tênis é ideal para agachamento e levantamento? Veja nossas recomendações.</p>
+                  <div class="card-meta">
+                    <span>📅 03 Mai 2026</span>
+                    <div class="card-rating"><span class="stars">★★★★★</span> 4.8</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-image-placeholder" aria-hidden="true">⚖️</div>
+                <div class="card-body">
+                  <div class="card-category">Comparativos</div>
+                  <h2 class="card-title" style="font-size:1rem;">
+                    <a href="./">Whey Concentrado vs Isolado: Qual é Melhor para o Seu Objetivo?</a>
+                  </h2>
+                  <p class="card-excerpt">Comparação detalhada entre as duas versões de whey. Qual comprar para hipertrofia e emagrecimento.</p>
+                  <div class="card-meta">
+                    <span>📅 01 Mai 2026</span>
+                    <div class="card-rating"><span class="stars">★★★★★</span> 4.9</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-image-placeholder" aria-hidden="true">🔥</div>
+                <div class="card-body">
+                  <div class="card-category">Emagrecimento · Guia</div>
+                  <h2 class="card-title" style="font-size:1rem;">
+                    <a href="./">Cinto de Musculação Vale a Pena? Quando Usar e Qual Comprar</a>
+                  </h2>
+                  <p class="card-excerpt">O cinto de musculação realmente ajuda? Veja quando usar, como usar e qual comprar.</p>
+                  <div class="card-meta">
+                    <span>📅 28 Abr 2026</span>
+                    <div class="card-rating"><span class="stars">★★★★☆</span> 4.5</div>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+
+            <!-- Pagination -->
+            <nav class="pagination" aria-label="Paginação">
+              <span class="current" aria-current="page">1</span>
+              <a href="./?page=2">2</a>
+              <a href="./?page=3">3</a>
+              <a href="./?page=4">4</a>
+              <a href="./?page=2" aria-label="Próxima página">›</a>
+            </nav>
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="sidebar" aria-label="Barra lateral">
+            <div class="sidebar-widget">
+              <h2 class="sidebar-title">Posts Populares</h2>
+              <div class="post-list">
+                <div class="post-list-item">
+                  <div class="post-list-num">01</div>
+                  <div>
+                    <div class="post-list-title"><a href="../artigo/melhor-creatina-custo-beneficio/">Melhor Creatina Custo-Benefício</a></div>
+                    <div class="post-list-meta">💊 Suplementos · 4 min de leitura</div>
+                  </div>
+                </div>
+                <div class="post-list-item">
+                  <div class="post-list-num">02</div>
+                  <div>
+                    <div class="post-list-title"><a href="./">Whey Protein Vale a Pena?</a></div>
+                    <div class="post-list-meta">💊 Suplementos · 6 min de leitura</div>
+                  </div>
+                </div>
+                <div class="post-list-item">
+                  <div class="post-list-num">03</div>
+                  <div>
+                    <div class="post-list-title"><a href="./">Treinar em Casa Vale a Pena?</a></div>
+                    <div class="post-list-meta">🏋️ Equipamentos · 5 min de leitura</div>
+                  </div>
+                </div>
+                <div class="post-list-item">
+                  <div class="post-list-num">04</div>
+                  <div>
+                    <div class="post-list-title"><a href="./">Kit Básico para Iniciantes</a></div>
+                    <div class="post-list-meta">📚 Guias · 7 min de leitura</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sidebar-widget">
+              <h2 class="sidebar-title">Categorias</h2>
+              <nav aria-label="Categorias">
+                <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                  <a href="../categoria/suplementos/" style="display:flex;justify-content:space-between;align-items:center;font-size:0.875rem;padding:0.35rem 0;border-bottom:1px solid var(--color-border);color:var(--color-text);">
+                    <span>💊 Suplementos</span><span class="tag tag-gray">28</span>
+                  </a>
+                  <a href="../categoria/treino/" style="display:flex;justify-content:space-between;align-items:center;font-size:0.875rem;padding:0.35rem 0;border-bottom:1px solid var(--color-border);color:var(--color-text);">
+                    <span>🏋️ Treino</span><span class="tag tag-gray">22</span>
+                  </a>
+                  <a href="../categoria/reviews/" style="display:flex;justify-content:space-between;align-items:center;font-size:0.875rem;padding:0.35rem 0;border-bottom:1px solid var(--color-border);color:var(--color-text);">
+                    <span>⭐ Reviews</span><span class="tag tag-gray">45</span>
+                  </a>
+                  <a href="../categoria/comparativos/" style="display:flex;justify-content:space-between;align-items:center;font-size:0.875rem;padding:0.35rem 0;border-bottom:1px solid var(--color-border);color:var(--color-text);">
+                    <span>⚖️ Comparativos</span><span class="tag tag-gray">24</span>
+                  </a>
+                  <a href="../categoria/equipamentos/" style="display:flex;justify-content:space-between;align-items:center;font-size:0.875rem;padding:0.35rem 0;color:var(--color-text);">
+                    <span>🏠 Equipamentos</span><span class="tag tag-gray">20</span>
+                  </a>
+                </div>
+              </nav>
+            </div>
+
+            <div class="sidebar-widget" style="background:linear-gradient(135deg,var(--color-accent),#c1121f);color:white;">
+              <h2 style="color:white;font-size:1rem;margin-bottom:0.5rem;">📩 Newsletter</h2>
+              <p style="font-size:0.8rem;color:rgba(255,255,255,0.85);margin-bottom:1rem;">Receba os melhores reviews e ofertas direto no e-mail.</p>
+              <form class="email-capture-form" action="#" method="post" style="display:flex;flex-direction:column;gap:0.5rem;">
+                <label for="sidebar-email" class="hidden">Seu e-mail</label>
+                <input type="email" id="sidebar-email" name="email" placeholder="Seu e-mail" required autocomplete="email" style="padding:0.65rem;border-radius:6px;border:none;font-size:0.875rem;outline:none;" />
+                <button type="submit" class="btn btn-primary btn-sm" style="background:var(--color-primary);border-color:var(--color-primary);">Inscrever</button>
+              </form>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../" class="logo">
+            <div class="logo-icon" aria-hidden="true">💪</div>
+            <span class="logo-text">Fit<span>Blog</span> Pro</span>
+          </a>
+          <p>Seu guia para treinar melhor e comprar certo.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram">📸</a>
+            <a href="#" aria-label="YouTube">▶️</a>
+            <a href="#" aria-label="TikTok">🎵</a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-title">Categorias</h3>
+          <nav class="footer-links">
+            <a href="../categoria/suplementos/">Suplementos</a>
+            <a href="../categoria/treino/">Treino</a>
+            <a href="../categoria/hipertrofia/">Hipertrofia</a>
+            <a href="../categoria/emagrecimento/">Emagrecimento</a>
+            <a href="../categoria/equipamentos/">Equipamentos</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-title">Conteúdo</h3>
+          <nav class="footer-links">
+            <a href="./">Blog</a>
+            <a href="../categoria/reviews/">Reviews</a>
+            <a href="../categoria/comparativos/">Comparativos</a>
+            <a href="../categoria/guias-para-iniciantes/">Guias Iniciantes</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-title">Institucional</h3>
+          <nav class="footer-links">
+            <a href="../sobre/">Sobre o Blog</a>
+            <a href="../contato/">Contato</a>
+            <a href="../aviso-de-afiliado/">Aviso de Afiliado</a>
+            <a href="../politica-de-privacidade/">Política de Privacidade</a>
+            <a href="../termos-de-uso/">Termos de Uso</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 FitBlog Pro. Todos os direitos reservados.</p>
+        <p><a href="../aviso-de-afiliado/">Aviso de Afiliado</a> · <a href="../politica-de-privacidade/">Privacidade</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
