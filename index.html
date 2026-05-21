@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <span class="site-header__logo">Blog</span>
+    <span class="site-header__subtitle">Produtos recomendados</span>
+  </header>
+
+  <main>
+    <h2 class="section-title">Produtos Afiliados — Mercado Livre</h2>
+    <div class="products-grid" id="products-grid">
+      <!-- Os cards são inseridos dinamicamente pelo main.js -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Este blog pode conter links de afiliados. Ao comprar, você nos ajuda sem pagar nada a mais.</p>
+  </footer>
+
+  <!-- Carregue products.js antes de main.js -->
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
