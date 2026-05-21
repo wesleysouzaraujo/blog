@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core Pages -->
+  <url>
+    <loc>https://fitblogpro.com.br/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/blog/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+
+  <!-- Category Pages -->
+  <url>
+    <loc>https://fitblogpro.com.br/categoria/suplementos/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/categoria/treino/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/categoria/hipertrofia/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/categoria/emagrecimento/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/categoria/equipamentos/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/categoria/roupas-e-acessorios/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/categoria/alimentacao-fitness/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/categoria/reviews/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/categoria/comparativos/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/categoria/guias-para-iniciantes/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+
+  <!-- Example Article -->
+  <url>
+    <loc>https://fitblogpro.com.br/artigo/melhor-creatina-custo-beneficio/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+
+  <!-- Institutional Pages -->
+  <url>
+    <loc>https://fitblogpro.com.br/sobre/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/contato/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/aviso-de-afiliado/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/politica-de-privacidade/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://fitblogpro.com.br/termos-de-uso/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <lastmod>2026-05-15</lastmod>
+  </url>
+
+</urlset>
