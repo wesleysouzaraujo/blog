@@ -34,7 +34,7 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 
 # ID de afiliado padrão (matt_tool) — mesmo valor definido em main.js
-AFFILIATE_ID = "38524122"
+AFFILIATE_ID = "https://www.mercadolivre.com.br/social/wesleydesouzaraujo"
 
 # Raiz do repositório
 REPO_ROOT = Path(__file__).resolve().parent.parent
