@@ -45,7 +45,7 @@ AFFILIATE_CONFIG_PATH = REPO_ROOT / "assets" / "js" / "affiliate-config.js"
 # Mapeamento: chave do produto → query de busca no Mercado Livre
 # Ajuste as queries para retornar o produto mais relevante.
 PRODUCT_QUERIES = {
-    "growth-creatina"
+    "creatina": "growth-creatina"
     # "max-titanium-creatine": "Max Titanium Creatine 300g",
     # "on-creatine":           "Optimum Nutrition Creatine Powder 300g",
     # "probiotica-creatina":   "Probiótica creatina monohidratada",
