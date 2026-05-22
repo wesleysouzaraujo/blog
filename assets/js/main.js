@@ -118,6 +118,58 @@
     });
   }
 
+  /* === Affiliate Links Configuration === */
+  const affiliateLinksByProduct = {
+    'growth-creatina': 'https://www.mercadolivre.com.br/s#D[A:growth+supplements+creatina+monohidratada]',
+    'max-titanium-creatine': 'https://www.mercadolivre.com.br/s#D[A:max+titanium+creatine]',
+    'optimum-nutrition-creatine': 'https://www.mercadolivre.com.br/s#D[A:optimum+nutrition+creatine+powder]',
+    'probiotica-creatina': 'https://www.mercadolivre.com.br/s#D[A:probiotica+creatina]',
+    'dark-lab-creatina': 'https://www.mercadolivre.com.br/s#D[A:dark+lab+creatina+micronizada]',
+    'integralmedica-creatina': 'https://www.mercadolivre.com.br/s#D[A:integralmedica+creatina]',
+    'universal-creatine': 'https://www.mercadolivre.com.br/s#D[A:universal+creatine]'
+  };
+
+  const affiliateButtons = document.querySelectorAll('a.affiliate-link[data-product]');
+
+  affiliateButtons.forEach(function (link) {
+    const product = link.dataset.product;
+    const url = affiliateLinksByProduct[product];
+    const relValues = new Set((link.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+    relValues.add('nofollow');
+    relValues.add('noopener');
+    relValues.add('noreferrer');
+    link.setAttribute('rel', Array.from(relValues).join(' '));
+    link.setAttribute('target', '_blank');
+
+    if (url) {
+      link.setAttribute('href', url);
+    } else {
+      link.removeAttribute('href');
+      link.setAttribute('aria-disabled', 'true');
+      link.setAttribute('tabindex', '-1');
+      link.classList.add('affiliate-link-disabled');
+      if (!link.textContent.includes('Em breve')) {
+        link.textContent = link.textContent.trim() + ' (Em breve)';
+      }
+    }
+
+    link.addEventListener('click', function (e) {
+      if (!url) {
+        e.preventDefault();
+        return;
+      }
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'affiliate_click', {
+          event_category: 'affiliate',
+          event_label: product,
+          affiliate_product: product,
+          affiliate_url: url
+        });
+      }
+    });
+  });
+
   /* === Smooth Scroll for Anchor Links === */
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {

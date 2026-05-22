@@ -23,13 +23,13 @@
    * ------------------------------------------------------- */
   var AFFILIATE_LINKS = {
     /* --- Creatinas --- */
-    'growth-creatina':         'https://mercadolivre.com/sec/INSIRA_LINK_GROWTH_CREATINA',
-    'max-titanium-creatine':   'https://mercadolivre.com/sec/INSIRA_LINK_MAX_TITANIUM',
-    'on-creatine':             'https://mercadolivre.com/sec/INSIRA_LINK_ON_CREATINE',
-    'probiotica-creatina':     'https://mercadolivre.com/sec/INSIRA_LINK_PROBIOTICA',
-    'dark-lab-creatina':       'https://mercadolivre.com/sec/INSIRA_LINK_DARK_LAB',
-    'integralmedica-creatina': 'https://mercadolivre.com/sec/INSIRA_LINK_INTEGRALMEDICA',
-    'universal-creatine':      'https://mercadolivre.com/sec/INSIRA_LINK_UNIVERSAL'
+    'growth-creatina': 'https://www.mercadolivre.com.br/s#D[A:growth+supplements+creatina+monohidratada]',
+    'max-titanium-creatine': 'https://www.mercadolivre.com.br/s#D[A:max+titanium+creatine]',
+    'on-creatine': 'https://www.mercadolivre.com.br/s#D[A:optimum+nutrition+creatine+powder]',
+    'probiotica-creatina': 'https://www.mercadolivre.com.br/s#D[A:probiotica+creatina]',
+    'dark-lab-creatina': 'https://www.mercadolivre.com.br/s#D[A:dark+lab+creatina+micronizada]',
+    'integralmedica-creatina': 'https://www.mercadolivre.com.br/s#D[A:integralmedica+creatina]',
+    'universal-creatine': 'https://www.mercadolivre.com.br/s#D[A:universal+creatine]'
 
     /* Adicione novos produtos aqui seguindo o mesmo padrão:
     'id-do-produto': 'https://mercadolivre.com/sec/SEU_LINK_AQUI', */
@@ -46,15 +46,22 @@
       var productId = el.getAttribute('data-affiliate-product');
       var url = AFFILIATE_LINKS[productId];
 
-      if (url && url.indexOf('INSIRA_LINK') === -1) {
+      if (url) {
         el.setAttribute('href', url);
-        el.setAttribute('rel', 'nofollow noopener sponsored');
+        el.setAttribute('rel', 'nofollow noopener noreferrer');
         el.setAttribute('target', '_blank');
         el.removeAttribute('aria-disabled');
+        el.removeAttribute('tabindex');
+        el.classList.remove('affiliate-link-disabled');
       } else {
         /* Link ainda não configurado — mantém visual mas bloqueia clique */
-        el.setAttribute('href', '#');
+        el.removeAttribute('href');
         el.setAttribute('aria-disabled', 'true');
+        el.setAttribute('tabindex', '-1');
+        el.classList.add('affiliate-link-disabled');
+        if (el.textContent.indexOf('Em breve') === -1) {
+          el.textContent = el.textContent.trim() + ' (Em breve)';
+        }
         if (typeof console !== 'undefined') {
           console.warn(
             '[FitBlog Afiliados] Link do Mercado Livre não configurado para o produto: "' +
@@ -62,6 +69,22 @@
           );
         }
       }
+
+      el.addEventListener('click', function (event) {
+        if (!url) {
+          event.preventDefault();
+          return;
+        }
+
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'affiliate_click', {
+            event_category: 'affiliate',
+            event_label: productId,
+            affiliate_product: productId,
+            affiliate_url: url
+          });
+        }
+      });
     });
   }
 
