@@ -208,9 +208,11 @@
     const finalUrl = resolveAffiliateUrl(productKey);
 
     if (finalUrl && finalUrl !== '#') {
-      link.href = finalUrl;
-      link.setAttribute('rel', 'nofollow sponsored noopener noreferrer');
-      link.setAttribute('target', '_blank');
+      const updatedLink = link.cloneNode(true);
+      updatedLink.href = finalUrl;
+      updatedLink.setAttribute('rel', 'nofollow sponsored noopener noreferrer');
+      updatedLink.setAttribute('target', '_blank');
+      link.replaceWith(updatedLink);
     }
   });
 
