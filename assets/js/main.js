@@ -165,4 +165,53 @@
     });
   }
 
+  /* === Affiliate Links === */
+  const AFFILIATE_CONFIG = {
+    mercadolivre: {
+      matt_tool: '38524122'
+    }
+  };
+
+  const PRODUCT_LINKS = {
+    'growth-creatina-250g': {
+      store: 'mercadolivre',
+      url: 'https://www.mercadolivre.com.br/creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po/p/MLB19603205?pdp_filters=item_id%3AMLB5872060016'
+    }
+  };
+
+  function buildMercadoLivreAffiliateUrl(rawUrl) {
+    if (!rawUrl) return '#';
+
+    try {
+      const url = new URL(rawUrl);
+      url.searchParams.set('matt_tool', AFFILIATE_CONFIG.mercadolivre.matt_tool);
+      url.hash = '';
+      return url.toString();
+    } catch (error) {
+      return '#';
+    }
+  }
+
+  function resolveAffiliateUrl(productKey) {
+    const product = PRODUCT_LINKS[productKey];
+    if (!product) return '#';
+
+    if (product.store === 'mercadolivre') {
+      return buildMercadoLivreAffiliateUrl(product.url);
+    }
+
+    return product.url || '#';
+  }
+
+  document.querySelectorAll('.js-affiliate-link').forEach(function (link) {
+    const productKey = link.dataset.product;
+    const finalUrl = resolveAffiliateUrl(productKey);
+
+    if (finalUrl && finalUrl !== '#') {
+      link.href = finalUrl;
+      link.setAttribute('rel', 'nofollow sponsored noopener noreferrer');
+      link.setAttribute('target', '_blank');
+    }
+  });
+
 })();
