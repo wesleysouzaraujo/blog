@@ -46,12 +46,12 @@ AFFILIATE_CONFIG_PATH = REPO_ROOT / "assets" / "js" / "affiliate-config.js"
 # Ajuste as queries para retornar o produto mais relevante.
 PRODUCT_QUERIES = {
     "growth-creatina":       "Growth Supplements creatina monohidratada 250g",
-    "max-titanium-creatine": "Max Titanium Creatine 300g",
-    "on-creatine":           "Optimum Nutrition Creatine Powder 300g",
-    "probiotica-creatina":   "Probiótica creatina monohidratada",
-    "dark-lab-creatina":     "Dark Lab creatina micronizada",
-    "integralmedica-creatina": "IntegralMédica creatina monohidratada",
-    "universal-creatine":    "Universal Creatine 200g",
+    # "max-titanium-creatine": "Max Titanium Creatine 300g",
+    # "on-creatine":           "Optimum Nutrition Creatine Powder 300g",
+    # "probiotica-creatina":   "Probiótica creatina monohidratada",
+    # "dark-lab-creatina":     "Dark Lab creatina micronizada",
+    # "integralmedica-creatina": "IntegralMédica creatina monohidratada",
+    # "universal-creatine":    "Universal Creatine 200g",
 }
 
 # ---------------------------------------------------------------------------
