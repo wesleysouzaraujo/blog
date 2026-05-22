@@ -1,7 +1,7 @@
 /**
  * FitBlog Pro – Configuração de Links de Afiliado (Mercado Livre)
  *
- * Como usar:
+ * Como usar (manual):
  *  1. Acesse o Programa de Afiliados do Mercado Livre:
  *     https://www.mercadolivre.com.br/afiliados
  *  2. Gere o link rastreado para cada produto desejado.
@@ -9,8 +9,14 @@
  *     correspondente ao atributo  data-affiliate-product  do botão no HTML.
  *  4. Salve o arquivo — os botões serão atualizados automaticamente.
  *
- * Exemplo de link gerado pelo Mercado Livre:
- *   https://mercadolivre.com/sec/XXXXXXX
+ * Como usar (automático):
+ *  Execute o script de automação na raiz do projeto:
+ *    python3 scripts/update-affiliate-links.py
+ *  O script busca cada produto no Mercado Livre via API e preenche os links
+ *  com o parâmetro de rastreamento (matt_tool) automaticamente.
+ *
+ * Exemplo de link com ID de afiliado:
+ *   https://www.mercadolivre.com.br/.../p/MLBXXX?matt_tool=SEU_ID
  */
 
 (function () {
