@@ -706,6 +706,37 @@ p { margin-bottom: 1rem; }
   letter-spacing: 0.05em;
 }
 
+/* === Mercado Livre Affiliate Button === */
+.btn-mercadolivre {
+  background: #FFE600;
+  color: #333333;
+  border-color: #FFE600;
+}
+
+.btn-mercadolivre:hover {
+  background: #f0d800;
+  border-color: #f0d800;
+  color: #333333;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* === Mercado Livre badge (shown inside affiliate CTA boxes) === */
+.ml-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #FFE600;
+  color: #333333;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
 /* === Affiliate CTA Box === */
 .affiliate-cta-box {
   background: linear-gradient(135deg, #FEF3C7, #FDE68A);
