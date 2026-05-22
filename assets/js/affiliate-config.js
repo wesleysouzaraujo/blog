@@ -28,7 +28,6 @@
    * no painel do Programa de Afiliados do Mercado Livre.
    * ------------------------------------------------------- */
   var AFFILIATE_LINKS = {
-    /* --- Creatinas --- */
     'growth-creatina': 'https://www.mercadolivre.com.br/s#D[A:growth+supplements+creatina+monohidratada]',
     'max-titanium-creatine': 'https://www.mercadolivre.com.br/s#D[A:max+titanium+creatine]',
     'on-creatine': 'https://www.mercadolivre.com.br/s#D[A:optimum+nutrition+creatine+powder]',
