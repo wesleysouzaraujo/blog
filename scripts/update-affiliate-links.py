@@ -65,14 +65,39 @@ def search_mercadolivre(query: str, limit: int = 5) -> list[dict]:
     """Chama a API pública do ML e retorna os primeiros `limit` resultados."""
     params = urllib.parse.urlencode({"q": query, "limit": limit})
     url = f"{ML_SEARCH_URL}?{params}"
-    req = urllib.request.Request(url, headers={"User-Agent": "FitBlogAffiliateBot/1.0"})
-    try:
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read().decode())
-            return data.get("results", [])
-    except urllib.error.URLError as exc:
-        print(f"  [ERRO] Falha ao buscar '{query}': {exc}", file=sys.stderr)
-        return []
+
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/125.0.0.0 Safari/537.36"
+        ),
+        "Accept": "application/json,text/plain,*/*",
+        "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8",
+    }
+
+    for attempt in range(3):
+        req = urllib.request.Request(url, headers=headers)
+        try:
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                data = json.loads(resp.read().decode())
+                return data.get("results", [])
+        except urllib.error.HTTPError as exc:
+            print(
+                f"  [ERRO] HTTP {exc.code} ao buscar '{query}' (tentativa {attempt + 1}/3)",
+                file=sys.stderr,
+            )
+            if exc.code == 403 and attempt < 2:
+                wait_seconds = 2 * (attempt + 1)
+                print(f"  [INFO] Aguardando {wait_seconds}s para tentar novamente...", file=sys.stderr)
+                time.sleep(wait_seconds)
+                continue
+            return []
+        except urllib.error.URLError as exc:
+            print(f"  [ERRO] Falha ao buscar '{query}': {exc}", file=sys.stderr)
+            return []
+
+    return []
 
 
 def build_affiliate_url(permalink: str, affiliate_id: str) -> str:
@@ -187,7 +212,7 @@ def main() -> None:
             failed.append(product_key)
 
         # Pausa para não sobrecarregar a API
-        time.sleep(0.5)
+        time.sleep(2)
 
     print()
 
