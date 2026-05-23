@@ -6,6 +6,24 @@
       "sourceType": "github",
       "skillPath": "skills/blog/SKILL.md",
       "computedHash": "ba20db5779472b6015175f1fdeb3fccc41d0e722c4f0e6ec92b9e8d6719875ba"
+    },
+    "blog-post": {
+      "source": "langchain-ai/deepagents",
+      "sourceType": "github",
+      "skillPath": "examples/content-builder-agent/skills/blog-post/SKILL.md",
+      "computedHash": "4a695b9be73d15798cf887a5c55732a8247e4926d2ce3d844c97ae57c44bb3f2"
+    },
+    "quality-playbook": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/quality-playbook/SKILL.md",
+      "computedHash": "995cfa79a5e410a2675a828da08fc2377f5ee7182d210787ae4bece43bad3857"
+    },
+    "security-review": {
+      "source": "getsentry/skills",
+      "sourceType": "github",
+      "skillPath": "skills/security-review/SKILL.md",
+      "computedHash": "ec9792f5fd065e020c48ab5a57707c83435c286c449ba98dfa726d7b1842c868"
     }
   }
 }
