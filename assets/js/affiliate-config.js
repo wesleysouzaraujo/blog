@@ -6,7 +6,7 @@
  *     https://www.mercadolivre.com.br/afiliados
  *  2. Gere o link rastreado para cada produto desejado.
  *  3. Cole o link no objeto AFFILIATE_LINKS abaixo, usando o ID
- *     correspondente ao atributo  data-affiliate-product  do botão no HTML.
+ *     correspondente ao atributo data-product do botão no HTML.
  *  4. Salve o arquivo — os botões serão atualizados automaticamente.
  *
  * Como usar (automático):
@@ -29,7 +29,7 @@
    * ------------------------------------------------------- */
   var AFFILIATE_LINKS = {
     /* --- Creatinas --- */
-    'growth-creatina': 'https://www.mercadolivre.com.br/s#D[A:growth+supplements+creatina+monohidratada]',
+    'growth-creatina-250g': 'https://www.mercadolivre.com.br/s#D[A:growth+supplements+creatina+monohidratada]',
     'max-titanium-creatine': 'https://www.mercadolivre.com.br/s#D[A:max+titanium+creatine]',
     'on-creatine': 'https://www.mercadolivre.com.br/s#D[A:optimum+nutrition+creatine+powder]',
     'probiotica-creatina': 'https://www.mercadolivre.com.br/s#D[A:probiotica+creatina]',
@@ -43,34 +43,60 @@
 
   /* -------------------------------------------------------
    * Preenche automaticamente os href dos botões que usam
-   * o atributo  data-affiliate-product.
+   * o atributo data-product.
    * ------------------------------------------------------- */
+  function getSafeAffiliateUrl(rawUrl) {
+    if (!rawUrl) return null;
+
+    try {
+      var parsedUrl = new URL(rawUrl, window.location.origin);
+      var hostname = parsedUrl.hostname.toLowerCase();
+      var isMercadoLivreHost = (
+        hostname === 'mercadolivre.com.br' ||
+        hostname === 'www.mercadolivre.com.br' ||
+        hostname.endsWith('.mercadolivre.com.br')
+      );
+
+      if (parsedUrl.protocol !== 'https:' || !isMercadoLivreHost) {
+        return null;
+      }
+
+      return parsedUrl.toString();
+    } catch (error) {
+      return null;
+    }
+  }
+
   function applyAffiliateLinks() {
-    var buttons = document.querySelectorAll('[data-affiliate-product]');
+    var buttons = document.querySelectorAll('[data-product]');
 
     buttons.forEach(function (el) {
-      var productId = el.getAttribute('data-affiliate-product');
-      var url = AFFILIATE_LINKS[productId];
+      var productId = el.getAttribute('data-product');
+      var rawUrl = AFFILIATE_LINKS[productId];
+      var url = getSafeAffiliateUrl(rawUrl);
+
+      el.setAttribute('rel', 'nofollow sponsored noopener noreferrer');
+      el.setAttribute('target', '_blank');
 
       if (url) {
         el.setAttribute('href', url);
-        el.setAttribute('rel', 'nofollow noopener noreferrer');
-        el.setAttribute('target', '_blank');
         el.removeAttribute('aria-disabled');
         el.removeAttribute('tabindex');
+        el.removeAttribute('title');
         el.classList.remove('affiliate-link-disabled');
       } else {
-        /* Link ainda não configurado — mantém visual mas bloqueia clique */
+        /* Link não configurado ou inválido — mantém visual mas bloqueia clique */
         el.removeAttribute('href');
         el.setAttribute('aria-disabled', 'true');
         el.setAttribute('tabindex', '-1');
+        el.setAttribute('title', 'Link temporariamente indisponível');
         el.classList.add('affiliate-link-disabled');
         if (el.textContent.indexOf('Em breve') === -1) {
           el.textContent = el.textContent.trim() + ' (Em breve)';
         }
         if (typeof console !== 'undefined') {
-          console.warn(
-            '[FitBlog Afiliados] Link do Mercado Livre não configurado para o produto: "' +
+          console.error(
+            '[FitBlog Afiliados] Link ausente ou inválido para o produto: "' +
             productId + '". Edite assets/js/affiliate-config.js para adicionar o link.'
           );
         }
