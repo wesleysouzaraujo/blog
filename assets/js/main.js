@@ -91,7 +91,16 @@
   emailForms.forEach(function (form) {
     form.addEventListener('submit', function (e) {
       const formAction = (form.getAttribute('action') || '').trim();
-      const hasRealEndpoint = formAction && formAction !== '#' && !formAction.toLowerCase().startsWith('javascript:');
+      let hasUnsafeActionProtocol = false;
+      if (formAction) {
+        try {
+          const parsedAction = new URL(formAction, window.location.origin);
+          hasUnsafeActionProtocol = ['javascript:', 'data:', 'vbscript:'].includes(parsedAction.protocol);
+        } catch (error) {
+          hasUnsafeActionProtocol = true;
+        }
+      }
+      const hasRealEndpoint = formAction && formAction !== '#' && !hasUnsafeActionProtocol;
       if (hasRealEndpoint) return;
 
       e.preventDefault();
