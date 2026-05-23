@@ -30,22 +30,44 @@
   /* === FAQ Accordion === */
   const faqQuestions = document.querySelectorAll('.faq-question');
 
-  faqQuestions.forEach(function (question) {
+  faqQuestions.forEach(function (question, index) {
+    const answer = question.nextElementSibling;
+    const questionId = question.id || 'faq-question-' + (index + 1);
+    const answerId = (answer && answer.id) || 'faq-answer-' + (index + 1);
+    question.id = questionId;
+
+    if (answer) {
+      answer.id = answerId;
+      answer.setAttribute('aria-labelledby', questionId);
+      question.setAttribute('aria-controls', answerId);
+      const isExpanded = question.classList.contains('active');
+      question.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      answer.hidden = !isExpanded;
+    }
+
     question.addEventListener('click', function () {
-      const answer = this.nextElementSibling;
+      const currentAnswer = this.nextElementSibling;
       const isActive = this.classList.contains('active');
 
       // Close all
       faqQuestions.forEach(function (q) {
         q.classList.remove('active');
+        q.setAttribute('aria-expanded', 'false');
         const a = q.nextElementSibling;
-        if (a) a.classList.remove('open');
+        if (a) {
+          a.classList.remove('open');
+          a.hidden = true;
+        }
       });
 
       // Toggle current
       if (!isActive) {
         this.classList.add('active');
-        if (answer) answer.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+        if (currentAnswer) {
+          currentAnswer.classList.add('open');
+          currentAnswer.hidden = false;
+        }
       }
     });
   });
@@ -68,24 +90,21 @@
 
   emailForms.forEach(function (form) {
     form.addEventListener('submit', function (e) {
+      const formAction = (form.getAttribute('action') || '').trim();
+      const hasRealEndpoint = formAction && formAction !== '#' && !formAction.toLowerCase().startsWith('javascript:');
+      if (hasRealEndpoint) return;
+
       e.preventDefault();
       const emailInput = form.querySelector('input[type="email"]');
-      const submitBtn = form.querySelector('button[type="submit"]');
+      const status = form.nextElementSibling && form.nextElementSibling.classList.contains('newsletter-form-note')
+        ? form.nextElementSibling
+        : null;
 
       if (!emailInput || !emailInput.value) return;
-
-      // Simulate form submission feedback
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = '✓ Inscrito!';
-      submitBtn.disabled = true;
-      submitBtn.style.background = '#16a34a';
-
-      setTimeout(function () {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-        submitBtn.style.background = '';
-        emailInput.value = '';
-      }, 3000);
+      if (status) {
+        status.textContent = 'Cadastro em implantação. Use a página de contato para solicitar novidades por e-mail.';
+      }
+      emailInput.blur();
     });
   });
 
@@ -117,58 +136,6 @@
       }, 1500);
     });
   }
-
-  /* === Affiliate Links Configuration === */
-  const affiliateLinksByProduct = {
-    'growth-creatina': 'https://www.mercadolivre.com.br/s#D[A:growth+supplements+creatina+monohidratada]',
-    'max-titanium-creatine': 'https://www.mercadolivre.com.br/s#D[A:max+titanium+creatine]',
-    'optimum-nutrition-creatine': 'https://www.mercadolivre.com.br/s#D[A:optimum+nutrition+creatine+powder]',
-    'probiotica-creatina': 'https://www.mercadolivre.com.br/s#D[A:probiotica+creatina]',
-    'dark-lab-creatina': 'https://www.mercadolivre.com.br/s#D[A:dark+lab+creatina+micronizada]',
-    'integralmedica-creatina': 'https://www.mercadolivre.com.br/s#D[A:integralmedica+creatina]',
-    'universal-creatine': 'https://www.mercadolivre.com.br/s#D[A:universal+creatine]'
-  };
-
-  const affiliateButtons = document.querySelectorAll('a.affiliate-link[data-product]');
-
-  affiliateButtons.forEach(function (link) {
-    const product = link.dataset.product;
-    const url = affiliateLinksByProduct[product];
-    const relValues = new Set((link.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
-    relValues.add('nofollow');
-    relValues.add('noopener');
-    relValues.add('noreferrer');
-    link.setAttribute('rel', Array.from(relValues).join(' '));
-    link.setAttribute('target', '_blank');
-
-    if (url) {
-      link.setAttribute('href', url);
-    } else {
-      link.removeAttribute('href');
-      link.setAttribute('aria-disabled', 'true');
-      link.setAttribute('tabindex', '-1');
-      link.classList.add('affiliate-link-disabled');
-      if (!link.textContent.includes('Em breve')) {
-        link.textContent = link.textContent.trim() + ' (Em breve)';
-      }
-    }
-
-    link.addEventListener('click', function (e) {
-      if (!url) {
-        e.preventDefault();
-        return;
-      }
-
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'affiliate_click', {
-          event_category: 'affiliate',
-          event_label: product,
-          affiliate_product: product,
-          affiliate_url: url
-        });
-      }
-    });
-  });
 
   /* === Smooth Scroll for Anchor Links === */
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
@@ -216,56 +183,5 @@
       observer.observe(el);
     });
   }
-
-  /* === Affiliate Links === */
-  const AFFILIATE_CONFIG = {
-    mercadolivre: {
-      matt_tool: '38524122'
-    }
-  };
-
-  const PRODUCT_LINKS = {
-    'growth-creatina-250g': {
-      store: 'mercadolivre',
-      url: 'https://www.mercadolivre.com.br/creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po/p/MLB19603205?pdp_filters=item_id%3AMLB5872060016'
-    }
-  };
-
-  function buildMercadoLivreAffiliateUrl(rawUrl) {
-    if (!rawUrl) return '#';
-
-    try {
-      const url = new URL(rawUrl);
-      url.searchParams.set('matt_tool', AFFILIATE_CONFIG.mercadolivre.matt_tool);
-      url.hash = '';
-      return url.toString();
-    } catch (error) {
-      return '#';
-    }
-  }
-
-  function resolveAffiliateUrl(productKey) {
-    const product = PRODUCT_LINKS[productKey];
-    if (!product) return '#';
-
-    if (product.store === 'mercadolivre') {
-      return buildMercadoLivreAffiliateUrl(product.url);
-    }
-
-    return product.url || '#';
-  }
-
-  document.querySelectorAll('.js-affiliate-link').forEach(function (link) {
-    const productKey = link.dataset.product;
-    const finalUrl = resolveAffiliateUrl(productKey);
-
-    if (finalUrl && finalUrl !== '#') {
-      const updatedLink = link.cloneNode(true);
-      updatedLink.href = finalUrl;
-      updatedLink.setAttribute('rel', 'nofollow sponsored noopener noreferrer');
-      updatedLink.setAttribute('target', '_blank');
-      link.replaceWith(updatedLink);
-    }
-  });
 
 })();
