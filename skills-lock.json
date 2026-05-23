@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "blog": {
+      "source": "agricidaniel/claude-blog",
+      "sourceType": "github",
+      "skillPath": "skills/blog/SKILL.md",
+      "computedHash": "ba20db5779472b6015175f1fdeb3fccc41d0e722c4f0e6ec92b9e8d6719875ba"
+    }
+  }
+}
