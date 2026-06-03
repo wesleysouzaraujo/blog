@@ -100,13 +100,52 @@ def search_mercadolivre(query: str, limit: int = 5) -> list[dict]:
     return []
 
 
-def build_affiliate_url(permalink: str, affiliate_id: str) -> str:
-    """Adiciona o parâmetro matt_tool ao URL do produto."""
-    parsed = urllib.parse.urlparse(permalink)
+_ML_ALLOWED_HOSTS = {
+    "mercadolivre.com.br",
+    "www.mercadolivre.com.br",
+    "produto.mercadolivre.com.br",
+}
+
+
+def build_affiliate_url(permalink: str, affiliate_id: str) -> str | None:
+    """Adiciona o parâmetro matt_tool ao URL do produto.
+
+    Retorna None se o permalink não for um URL HTTPS do Mercado Livre,
+    evitando que dados inesperados da API sejam gravados no arquivo JS.
+    """
+    if not permalink:
+        return None
+    try:
+        parsed = urllib.parse.urlparse(permalink)
+    except ValueError:
+        return None
+
+    hostname = parsed.hostname or ""
+    is_ml_host = (
+        hostname in _ML_ALLOWED_HOSTS
+        or hostname.endswith(".mercadolivre.com.br")
+    )
+    if parsed.scheme != "https" or not is_ml_host:
+        print(
+            f"  [AVISO] Permalink ignorado — host/protocolo inválido: {permalink!r}",
+            file=sys.stderr,
+        )
+        return None
+
     qs = urllib.parse.parse_qs(parsed.query, keep_blank_values=True)
     qs["matt_tool"] = [affiliate_id]
     new_query = urllib.parse.urlencode(qs, doseq=True)
-    return parsed._replace(query=new_query).geturl()
+    url = parsed._replace(query=new_query).geturl()
+
+    # Garante que a URL não contenha aspas simples (quebraria o arquivo JS)
+    if "'" in url:
+        print(
+            f"  [AVISO] URL ignorada — contém aspas simples: {url!r}",
+            file=sys.stderr,
+        )
+        return None
+
+    return url
 
 
 def pick_best_result(results: list[dict]) -> dict | None:
@@ -204,9 +243,13 @@ def main() -> None:
         if best:
             permalink = best.get("permalink", "")
             affiliate_url = build_affiliate_url(permalink, affiliate_id)
-            new_links[product_key] = affiliate_url
-            print(f"   ✅ {best.get('title', '')}")
-            print(f"      {affiliate_url}")
+            if affiliate_url:
+                new_links[product_key] = affiliate_url
+                print(f"   ✅ {best.get('title', '')}")
+                print(f"      {affiliate_url}")
+            else:
+                print(f"   ⚠️  Permalink inválido ou rejeitado — mantendo URL anterior.")
+                failed.append(product_key)
         else:
             print(f"   ⚠️  Nenhum resultado encontrado — mantendo URL anterior.")
             failed.append(product_key)
@@ -223,10 +266,16 @@ def main() -> None:
     # Lê o conteúdo atual, preserva produtos não encontrados com sua URL original
     js_content = read_config(AFFILIATE_CONFIG_PATH)
 
-    # Extrai links existentes para manter fallback dos não encontrados
+    # Extrai links existentes para manter fallback dos não encontrados.
+    # O padrão ancora a extração dentro do bloco AFFILIATE_LINKS, evitando
+    # capturar strings de comentários ou outros literais do arquivo.
     existing: dict[str, str] = {}
-    for match in re.finditer(r"'([^']+)':\s*'([^']+)'", js_content):
-        existing[match.group(1)] = match.group(2)
+    block_match = re.search(
+        r"var AFFILIATE_LINKS\s*=\s*\{(.*?)\};", js_content, re.DOTALL
+    )
+    if block_match:
+        for match in re.finditer(r"'([^']+)':\s*'([^']+)'", block_match.group(1)):
+            existing[match.group(1)] = match.group(2)
 
     for key in failed:
         if key in existing:
