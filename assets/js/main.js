@@ -151,7 +151,12 @@
     anchor.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
       if (href === '#') return;
-      const target = document.querySelector(href);
+      var target;
+      try {
+        target = document.querySelector(href);
+      } catch (_) {
+        return;
+      }
       if (target) {
         e.preventDefault();
         const offset = 80;
