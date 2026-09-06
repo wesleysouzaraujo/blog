@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Redirecionando...</title>
+<style>
+  body { font-family: Inter, Arial, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; background:#F8F9FA; }
+  .box { text-align:center; }
+  .spinner { width:36px; height:36px; border:4px solid #eee; border-top-color:#E63946; border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 1rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="spinner" aria-hidden="true"></div>
+    <p>Redirecionando para o Mercado Livre...</p>
+    <p><a id="fallback-link" href="/">Clique aqui se não for redirecionado automaticamente</a></p>
+  </div>
+
+<script>
+/**
+ * Redirecionador central de links de afiliado.
+ *
+ * Uso nos artigos:
+ *   <a href="/go/?p=creatina-growth" rel="sponsored noopener" target="_blank">Ver na Mercado Livre</a>
+ *
+ * Vantagens:
+ *  - Um único lugar para trocar o ID de afiliado (não precisa editar N páginas)
+ *  - Permite registrar clique (analytics) antes de sair do site
+ *  - rel="sponsored" fica implícito no próprio link de origem (adicione no <a>)
+ *  - Se o produto sair de linha, você atualiza o mapeamento aqui sem quebrar o artigo
+ *
+ * IMPORTANTE: preencha AFFILIATE_TAG com seu ID de afiliado real do
+ * Mercado Livre antes de usar em produção.
+ */
+
+var AFFILIATE_TAG = 'SEU_ID_DE_AFILIADO'; // TODO: substituir pelo ID real
+
+// Mapeamento slug -> URL do produto no Mercado Livre (sem o parâmetro de afiliado,
+// ele é adicionado automaticamente abaixo).
+var PRODUCTS = {
+  'creatina-growth': 'https://www.mercadolivre.com.br/exemplo-creatina-growth',
+  'whey-optimum-gold': 'https://www.mercadolivre.com.br/exemplo-whey-optimum',
+  'pre-treino-c4': 'https://www.mercadolivre.com.br/exemplo-pre-treino-c4'
+  // Adicione novos produtos aqui conforme forem revisados.
+};
+
+function getParam(name) {
+  var params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
+function buildAffiliateUrl(baseUrl) {
+  var separator = baseUrl.indexOf('?') === -1 ? '?' : '&';
+  return baseUrl + separator + 'matt_tool=' + encodeURIComponent(AFFILIATE_TAG);
+}
+
+(function redirect() {
+  var slug = getParam('p');
+  var destination = slug && PRODUCTS[slug];
+
+  var fallback = document.getElementById('fallback-link');
+
+  if (!destination) {
+    // Slug inválido ou ausente: manda para a home em vez de dar erro.
+    fallback.href = '/';
+    window.location.replace('/');
+    return;
+  }
+
+  var finalUrl = buildAffiliateUrl(destination);
+  fallback.href = finalUrl;
+
+  // Ponto de extensão: registrar o clique antes de redirecionar.
+  // Exemplo com Google Analytics 4 (gtag), se estiver configurado no site:
+  if (typeof gtag === 'function') {
+    gtag('event', 'affiliate_click', {
+      product_slug: slug,
+      destination: finalUrl
+    });
+  }
+
+  window.location.replace(finalUrl);
+})();
+</script>
+</body>
+</html>
